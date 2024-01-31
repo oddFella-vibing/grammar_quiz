@@ -1,8 +1,8 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:grammar_quiz/data/question_list.dart';
+import 'package:grammar_quiz/models/answer.dart';
+import 'package:grammar_quiz/models/question.dart';
 import 'package:grammar_quiz/utils/summary_item.dart';
 
 class ResultPage extends StatelessWidget {
@@ -26,36 +26,45 @@ class ResultPage extends StatelessWidget {
     }
     return summaryList;
   }
-  
 
   @override
   Widget build(BuildContext context) {
     var totalQuestion = questionList.length;
-    var totalCorrect= getSummaryData().where((element) => element['right_answer']==element['user_answer'],).length;
-    
+    var totalCorrect = getSummaryData()
+        .where(
+          (element) => element['right_answer'] == element['user_answer'],
+        )
+        .length;
+
     return Center(
       child: Column(
         mainAxisSize: MainAxisSize.max,
         children: [
           Container(
             height: 200,
-            padding: EdgeInsets.only(top: 100,left: 10),
+            padding: EdgeInsets.only(top: 100, left: 10),
             child: Center(
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('quiz completed !',style: GoogleFonts.kalam(color: Colors.white),),
-                    Text(
-                                  'You answered $totalCorrect out of $totalQuestion questions correctly.',
-                                  style: GoogleFonts.fjallaOne(color: Colors.white, fontSize: 25,letterSpacing: 3),
-                                ),
-                  ],
-                )),
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'quiz completed !',
+                  style: GoogleFonts.kalam(color: Colors.white),
+                ),
+                Text(
+                  'You answered $totalCorrect out of $totalQuestion questions correctly.',
+                  style: GoogleFonts.fjallaOne(
+                      color: Colors.white, fontSize: 25, letterSpacing: 3),
+                ),
+              ],
+            )),
           ),
           Expanded(
             child: Container(
               decoration: BoxDecoration(
-                  border: Border(top: BorderSide(color: const Color.fromARGB(255, 222, 222, 222))),
+                  border: Border(
+                      top: BorderSide(
+                          color: const Color.fromARGB(255, 222, 222, 222))),
                   gradient: LinearGradient(
                       colors: [Colors.white.withOpacity(0.8), Colors.white],
                       begin: Alignment.topCenter,
@@ -101,7 +110,10 @@ class ResultPage extends StatelessWidget {
                         ]),
                     child: IconButton(
                         onPressed: () => onRestart('quiz_page'),
-                        icon: const Icon(Icons.refresh,color: Color.fromARGB(255, 255, 255, 255),)),
+                        icon: const Icon(
+                          Icons.refresh,
+                          color: Color.fromARGB(255, 255, 255, 255),
+                        )),
                   ),
                   Container(
                     decoration: BoxDecoration(
@@ -115,16 +127,19 @@ class ResultPage extends StatelessWidget {
                               color: Colors.deepPurple.shade700,
                               blurRadius: 10,
                               spreadRadius: 1,
-                              offset:const Offset(3, 3)),
+                              offset: const Offset(3, 3)),
                           BoxShadow(
                               color: Colors.deepPurple.shade200,
                               blurRadius: 10,
                               spreadRadius: 1,
-                              offset:const Offset(-3, -3))
+                              offset: const Offset(-3, -3))
                         ]),
                     child: IconButton(
                         onPressed: () => onRestart('start_page'),
-                        icon: const Icon(Icons.exit_to_app,color: Colors.white,)),
+                        icon: const Icon(
+                          Icons.exit_to_app,
+                          color: Colors.white,
+                        )),
                   )
                 ],
               ),

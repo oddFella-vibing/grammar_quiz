@@ -1,7 +1,6 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:grammar_quiz/data/question_list.dart';
+
+import 'package:grammar_quiz/models/answer.dart';
 
 class AnswerButton extends StatelessWidget {
   const AnswerButton(
@@ -16,26 +15,25 @@ class AnswerButton extends StatelessWidget {
   final bool isChosen;
   @override
   Widget build(BuildContext context) {
+    Color checkColor = isAnswered && answer.isCorrect
+        ? const Color.fromARGB(255, 98, 255, 0)
+        : isChosen && !answer.isCorrect
+            ? const Color.fromARGB(255, 194, 13, 0)
+            : Colors.white;
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Container(
         width: 250,
         decoration: BoxDecoration(
-            border: isAnswered && answer.isCorrect
-                ? Border.all(color: Color.fromARGB(255, 98, 255, 0))
-                : isChosen && !answer.isCorrect
-                    ? Border.all(color: Color.fromARGB(255, 194, 13, 0))
-                    : Border.all(color: Colors.white),
+            border: Border.all(color: checkColor),
             color: Colors.white.withOpacity(0.2),
             borderRadius: BorderRadius.circular(30)),
         child: TextButton(
           onPressed: onTap,
-          child: Text(answer.answerText,
-              style: isAnswered && answer.isCorrect
-                  ? const TextStyle(color: Color.fromARGB(255, 0, 255, 8))
-                  : isChosen && !answer.isCorrect
-                      ? const TextStyle(color: Color.fromARGB(255, 255, 0, 0))
-                      : const TextStyle(color: Colors.white)),
+          child: Text(
+            answer.answerText,
+            style: TextStyle(color: checkColor),
+          ),
         ),
       ),
     );

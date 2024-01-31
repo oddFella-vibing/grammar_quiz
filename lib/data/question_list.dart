@@ -1,14 +1,7 @@
-class Question {
-  final String questionText;
-  final List<Answer> answerList;
-  Question(this.questionText, this.answerList);
-}
 
-class Answer {
-  final String answerText;
-  final bool isCorrect;
-  Answer(this.answerText, this.isCorrect);
-}
+
+import 'package:grammar_quiz/models/answer.dart';
+import 'package:grammar_quiz/models/question.dart';
 
 List<String> getCorrectAnswers() {
   List<String> list = [];
